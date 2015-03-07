@@ -39,6 +39,3 @@ Thumbs.db
 # SFTP #
 ######################
 sftp-config.json
-
-node_modules/*
-node_modules

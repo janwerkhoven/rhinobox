@@ -14,12 +14,9 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      options: {
-        livereload: true,
-      },
       handlebars: {
-        files: ['app/templates/**/*.hbs', 'app/templates/**/*.json'],
-        tasks: 'staticHandlebars'
+        files: ['app/templates/**/*.hbs', 'app/templates/**/*.json', 'app/templates/layout.html '],
+        tasks: 'handlebarslayouts'
       },
       sass: {
         files: ['app/sass/**/*.scss'],
@@ -28,17 +25,24 @@ module.exports = function(grunt) {
       js: {
         files: ['app/js/**/*.js'],
         tasks: ['jshint', 'concat', 'uglify']
+      },
+      options: {
+        livereload: true,
       }
     },
-    handlebarsLayouts: {
-      dev: {
-        files: {
-          'dist/*.html': 'app/templates/*.hbs'
-        },
+    handlebarslayouts: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'app/templates/',
+          src: ['**/*.hbs', '!partials/*'],
+          dest: 'dist/',
+          ext: '.html',
+        }],
         options: {
-          partials: ['app/templates/partials/*.hbs'],
+          partials: ['app/templates/partials/*.hbs', 'app/templates/layout.html'],
           basePath: 'app/templates/',
-          modules: ['app/templates/helpers/helpers-*.js', 'handlebars-helper-moment'],
+          modules: ['app/templates/helpers/helpers-*.js'],
           context: {
             title: 'Layout Test',
             projectName: 'Grunt handlebars layout',
@@ -51,33 +55,10 @@ module.exports = function(grunt) {
         }
       }
     },
-    staticHandlebars: {
-      options: {
-        partials: '',
-        helpers: ''
-      },
-      test: {
-        // Target-specific file lists and/or options go here. 
-        options: {
-          json: {
-            "extends": ["base.json"],
-            "title": "A new page title.",
-            "page": {
-              "title": "Welcome",
-              "content": "At our new test site."
-            },
-            "footer": "Some contact information about how to get in touch with us."
-          }
-        },
-        files: {
-          'dist/*.html': 'app/templates/*.hbs'
-        }
-      },
-    },
     sass: {
       dist: {
         options: {
-          style: 'compressed', // Output style: nested, compact, compressed, expanded
+          style: 'compressed',
           noCache: true
         },
         files: {
@@ -102,36 +83,31 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['app/js/libs/jquery.js', 'app/js/libs/velocity.js', 'app/js/libs/modernizr.js', 'app/js/main.js'],
-        dest: 'app/tmp/main.js',
+        dest: 'tmp/main.js',
       },
     },
     uglify: {
       dist: {
         files: {
-          'dist/assets/js/main.min.js': ['app/tmp/main.js']
+          'dist/assets/js/main.min.js': ['tmp/main.js']
         }
       }
-    },
+    }
   });
 
   // load tasks
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  // grunt.loadNpmTasks("grunt-handlebars-layouts");
+  grunt.loadNpmTasks("grunt-handlebars-layouts");
+  grunt.loadNpmTasks('grunt-html-prettyprinter');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-static-handlebars');
 
   // commands
-  grunt.registerTask('default', ['connect', 'watch']);
+  grunt.registerTask('default', ['handlebarslayouts', 'sass', 'jshint', 'concat', 'uglify', 'connect', 'watch']);
   grunt.registerTask('serve', ['connect', 'watch']);
-  grunt.registerTask('build', ['sass', 'jshint', 'concat', 'uglify']);
-
-  // log
-  grunt.event.on('watch', function(action, filepath, target) {
-    grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
-  });
+  grunt.registerTask('build', ['handlebarslayouts', 'sass', 'jshint', 'concat', 'uglify']);
 
 };
