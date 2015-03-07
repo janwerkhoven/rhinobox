@@ -1,0 +1,201 @@
+// LANDING PAGE ONLY
+
+#landing {
+  #hero {
+    .inner {
+      padding-top: 34px;
+      text-align: center;
+      img {
+        display: block;
+        margin: 22px auto 0;
+      }
+      h2 {
+        position: absolute;
+        left: 50%;
+        top: 230px;
+        margin-left: 250px;
+        line-height: 48px;
+        text-align: left;
+        span {
+          display: block;
+          margin-top: 30px;
+          font-size: 30px;
+        }
+      }
+    }
+  }
+  #feature {
+    background: #EEE;
+    .inner {
+      padding: 200px 20px 140px;
+      .bg {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 630px;
+        height: 710px;
+        background: url("../img/rhinobox-top-view.jpg") no-repeat;
+        background-size: cover;
+      }
+      h2 {
+        margin-bottom: 40px;
+      }
+      p {
+        max-width: 380px;
+        margin-bottom: 40px;
+      }
+      ul {
+        width: 380px;
+        &:after {
+          @include clearfix;
+        }
+        li {
+          float: left;
+          width: 65px;
+          height: 65px;
+          margin-right: 20px;
+          margin-bottom: 20px;
+          border: 3px solid #FFF;
+          background: #CCC;
+          @include border-box;
+          @include border-radius(3px);
+          &:hover {
+            background: $rhino-orange-1;
+          }
+        }
+      }
+    }
+  }
+  #verhuis,
+  #opslag {
+    .inner {
+      width: 1130px;
+      &:after {
+        @include clearfix;
+      }
+    }
+    .text {
+      .button {
+        margin-top: 20px;
+        font-size: 28px;
+      }
+    }
+    .image-frame {
+      padding: 13px 13px 50px 13px;
+      background: #FFF;
+      @include box-shadow(0 4px 13px -2px RGBA(0, 0, 0, 0.25));
+      @include border-radius(1px);
+      img {
+        display: block;
+      }
+    }
+  }
+  #verhuis {
+    .inner {
+      padding: 270px 0 130px;
+      .text {
+        float: left;
+        margin-left: 50px;
+        max-width: 450px;
+      }
+      .image-frame {
+        float: left;
+        margin-right: 30px;
+      }
+    }
+  }
+  #opslag {
+    .inner {
+      padding: 140px 0 270px;
+      border-top: 2px dashed #EAEAEA;
+      .text {
+        float: left;
+        max-width: 450px;
+      }
+      .image-frame {
+        float: right;
+        margin-left: 30px;
+      }
+    }
+  }
+  #testimonials {
+    background: $rhino-brown-1;
+    color: #FFF;
+    text-align: center;
+    .inner {
+      padding: 300px 20px;
+      ul {
+        text-align: center;
+        li {
+          position: relative;
+          display: inline-block;
+          width: 130px;
+          height: 130px;
+          margin: 15px;
+          background-size: 130px 130px;
+          background-color: #FFF;
+          background-repeat: no-repeat;
+          border: 4px solid #FFF;
+          @include border-radius(200px);
+          &:nth-child(1) {
+            background-image: url(../img/1.jpg);
+          }
+          &:nth-child(2) {
+            background-image: url(../img/5.jpg);
+          }
+          &:nth-child(3) {
+            background-image: url(../img/8.jpg);
+          }
+          &:nth-child(4) {
+            background-image: url(../img/14.jpg);
+            // 11
+         
+          }
+          &:nth-child(5) {
+            background-image: url(../img/15.jpg);
+          }
+          &:nth-child(6) {
+            background-image: url(../img/16.jpg);
+          }
+          blockquote {
+            position: absolute;
+            width: 520px;
+            left: 0px;
+            bottom: 170px;
+            margin: 0;
+            background: #FFF;
+            color: $rhino-graphite;
+            text-align: left;
+            padding: 30px;
+            font-size: 26px;
+            line-height: 100%;
+            @include border-radius(3px);
+            cite {
+              display: block;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+  #cta {
+    .inner {
+      width: 1130px;
+      padding: 120px 0;
+      text-align: center;
+      border-bottom: 2px dashed #EAEAEA;
+      .button {
+        .rhino {
+          position: absolute;
+          left: -150px;
+          bottom: -5px;
+          width: 117px;
+          height: 63px;
+          background: url(../img/rhino.svg) no-repeat;
+          background-size: 117px 63px;
+        }
+      }
+    }
+  }
+}
