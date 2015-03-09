@@ -26,6 +26,10 @@ module.exports = function(grunt) {
         files: ['app/js/**/*.js'],
         tasks: ['jshint', 'concat', 'uglify']
       },
+      gruntfile: {
+        files: ['Gruntfile.js'],
+        tasks: ['handlebarslayouts', 'sass', 'jshint', 'concat', 'uglify']
+      },
       options: {
         livereload: true,
       }
@@ -44,7 +48,7 @@ module.exports = function(grunt) {
           basePath: 'app/templates/',
           modules: ['app/templates/helpers/helpers-*.js'],
           context: {
-            title: 'Layout Test',
+            title: 'MOSHI MOSH <%= grunt.filename %>',
             projectName: 'Grunt handlebars layout',
             items: [
               'apple',
