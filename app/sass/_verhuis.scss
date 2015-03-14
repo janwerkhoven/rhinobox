@@ -5,7 +5,7 @@
     .inner {
       width: 900px;
       margin-top: 62px;
-      padding: 0 0 200px;
+      padding: 0 20px 120px;
       text-align: center;
       border-top: $dashed-line;
       h2 {
@@ -78,8 +78,97 @@
     }
   }
   #feature {
-    height: 600px;
-    background: #DDD;
-    .inner {}
+    background: #F2F2F2;
+    .inner {
+      padding: 120px 20px 180px;
+      h2 {
+        margin-bottom: 105px;
+        text-align: center;
+      }
+      &:after {
+        @include clearfix;
+      }
+      ul {
+        width: 50%;
+        li {
+          position: relative;
+          float: left;
+          width: 100%;
+          padding: 11px 10px;
+          @include border-box;
+          img {
+            display: block;
+            border: 10px solid #FFF;
+            background: #FFF;
+            @include box-shadow(0 4px 13px -2px RGBA(0, 0, 0, 0.25));
+            @include border-radius(1px);
+            background: #D7D7D7;
+            font-size: 14px;
+            font-weight: 400;
+          }
+          p {
+            position: absolute;
+            top: 20px;
+            padding: 16px 20px;
+            background: #FFF;
+            @include box-shadow(0 2px 6px -2px RGBA(0, 0, 0, 0.25));
+            @include border-radius(3px);
+            span {
+              position: absolute;
+              height: 100%;
+              width: 28px;
+              top: 0;
+              background-image: url(../img/chevron.svg);
+              background-repeat: no-repeat;
+              background-size: 55px 100%;
+              .no-svg & {
+                background-image: url(../img/chevron.png);
+              }
+            }
+          }
+        }
+        &:after {
+          @include clearfix;
+        }
+        &.left {
+          float: left;
+          img {
+            float: right;
+          }
+          p {
+            right: 270px;
+            padding-right: 7px;
+            span {
+              right: -24px;
+              background-position: -27px 0;
+            }
+          }
+        }
+        &.right {
+          float: right;
+          padding-top: 120px;
+          img {
+            float: left;
+          }
+          p {
+            left: 270px;
+            padding-left: 7px;
+            span {
+              left: -24px;
+              background-position: 0 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#cta {
+  .inner {
+    padding: 100px 20px;
+    h2 {
+      text-align: center;
+    }
   }
 }
