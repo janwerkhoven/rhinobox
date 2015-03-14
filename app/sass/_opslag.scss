@@ -26,9 +26,12 @@
         }
         li {
           float: left;
-          width: 300px;
+          width: 450px;
           padding: 0 30px;
           @include border-box;
+          // &:nth-child(4) {
+          //   clear: left;
+          // }
           h3 {
             width: 52px;
             height: 52px;
@@ -74,6 +77,20 @@
             }
           }
         }
+      }
+    }
+  }
+  #feature {
+    background: #F2F2F2;
+    .inner {
+      padding: 120px 20px 180px;
+    }
+  }
+  #cta {
+    .inner {
+      padding: 100px 20px;
+      h2 {
+        text-align: center;
       }
     }
   }
