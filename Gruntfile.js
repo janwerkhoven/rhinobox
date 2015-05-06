@@ -86,14 +86,14 @@ module.exports = function(grunt) {
         separator: ';\n\n',
       },
       dist: {
-        src: ['app/js/libs/jquery.js', 'app/js/libs/velocity.js', 'app/js/libs/modernizr.js', 'app/js/main.js'],
-        dest: 'tmp/main.js',
+        src: ['app/js/libs/jquery.js', 'app/js/libs/velocity.js', 'app/js/libs/modernizr.js', 'app/js/libs/waypoints.js', 'app/js/main.js'],
+        dest: 'dist/assets/js/main.js',
       },
     },
     uglify: {
       dist: {
         files: {
-          'dist/assets/js/main.min.js': ['tmp/main.js']
+          'dist/assets/js/main.min.js': ['dist/assets/js/main.js']
         }
       }
     }

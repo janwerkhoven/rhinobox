@@ -3,11 +3,15 @@
 #landing {
   #hero {
     .inner {
-      padding-top: 34px;
+      height: 920px;
+      padding-top: 44px;
       text-align: center;
       img {
         display: block;
-        margin: 22px auto 0;
+        position: absolute;
+        left: 50%;
+        top: 160px;
+        margin-left: -283px;
       }
       h2 {
         position: absolute;
@@ -26,17 +30,17 @@
   }
   #feature {
     background: #EEE;
+    overflow: hidden;
+    .bg {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -110px;
+      margin-top: -360px;
+    }
     .inner {
-      padding: 200px 20px 140px;
-      .bg {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 630px;
-        height: 710px;
-        background: url("../img/rhinobox-top-view.jpg") no-repeat;
-        background-size: cover;
-      }
+      position: relative;
+      padding: 150px 20px 110px;
       h2 {
         margin-bottom: 40px;
       }
@@ -69,7 +73,6 @@
   #verhuis,
   #opslag {
     .inner {
-      width: 1130px;
       &:after {
         @include clearfix;
       }
@@ -80,7 +83,7 @@
         font-size: 28px;
       }
     }
-    .image-frame {
+    .polaroid {
       padding: 13px 13px 50px 13px;
       background: #FFF;
       @include box-shadow(0 4px 13px -2px RGBA(0, 0, 0, 0.25));
@@ -98,7 +101,7 @@
         margin-left: 50px;
         max-width: 450px;
       }
-      .image-frame {
+      .polaroid {
         float: left;
         margin-right: 30px;
       }
@@ -112,7 +115,7 @@
         float: left;
         max-width: 450px;
       }
-      .image-frame {
+      .polaroid {
         float: right;
         margin-left: 30px;
       }
@@ -176,7 +179,6 @@
   }
   #cta {
     .inner {
-      width: 1130px;
       padding: 120px 0;
       text-align: center;
       border-bottom: $dashed-line;

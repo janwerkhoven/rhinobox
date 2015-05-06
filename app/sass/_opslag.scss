@@ -3,7 +3,6 @@
 #opslag {
   #hero {
     .inner {
-      width: 900px;
       margin-top: 62px;
       padding: 0 0 200px;
       text-align: center;
@@ -29,9 +28,6 @@
           width: 450px;
           padding: 0 30px;
           @include border-box;
-          // &:nth-child(4) {
-          //   clear: left;
-          // }
           h3 {
             width: 52px;
             height: 52px;
