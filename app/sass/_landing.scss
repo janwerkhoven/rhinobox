@@ -122,7 +122,8 @@
     }
   }
   #testimonials {
-    background: $rhino-brown-1;
+    background: $rhino-brown-1 url(../img/rhino-bg.jpg);
+    background-size: cover;
     color: #FFF;
     text-align: center;
     .inner {
