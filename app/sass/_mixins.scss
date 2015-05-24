@@ -18,48 +18,6 @@
   box-sizing: border-box;
 }
 
-@mixin perspective($values) {
-  -webkit-perspective: $values;
-  perspective: $values;
-}
-
-@mixin perspective-origin($values) {
-  -webkit-perspective-origin: $values;
-  perspective-origin: $values;
-}
-
-@mixin transform($values) {
-  -webkit-transform: $values;
-  -moz-transform: $values;
-  -ms-transform: $values;
-  -o-transform: $values;
-  transform: $values;
-}
-
-@mixin transform-origin($values) {
-  -webkit-transform-origin: $values;
-  transform-origin: $values;
-}
-
-@mixin linear-gradient($fromColor, $toColor) {
-  background-color: $fromColor;
-  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor));
-  background-image: -webkit-linear-gradient(top, $fromColor, $toColor);
-  background-image: -moz-linear-gradient(top, $fromColor, $toColor);
-  background-image: -ms-linear-gradient(top, $fromColor, $toColor);
-  background-image: -o-linear-gradient(top, $fromColor, $toColor);
-  background-image: linear-gradient(to bottom, $fromColor, $toColor);
-  background-repeat: repeat-x;
-  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-}
-
-@mixin transition($values) {
-  -webkit-transition: $values;
-  -moz-transition: $values;
-  -o-transition: $values;
-  transition: $values;
-}
-
 @mixin clearfix {
   content: ".";
   visibility: hidden;
@@ -76,13 +34,58 @@
   user-select: none;
 }
 
-@mixin responsive($value, $animated: true) {
-  @media all and ($value) {
-    @content;
-    @if $animated == true {
-      @include transition(all 500ms ease);
-    }
-  }
+@mixin transform($values) {
+  -webkit-transform: $values;
+  -moz-transform: $values;
+  -ms-transform: $values;
+  -o-transform: $values;
+  transform: $values;
+}
+
+@mixin transform-origin($values) {
+  -moz-transform-origin: $values;
+  -webkit-transform-origin: $values;
+  -ms-transform-origin: $values;
+  transform-origin: $values;
+}
+
+@mixin transform-style($values) {
+  -webkit-transform-style: $values;
+  -moz-transform-style: $values;
+  -ms-transform-style: $values;
+  transform-style: $values;
+}
+
+@mixin perspective($values) {
+  -webkit-perspective: $values;
+  -moz-perspective: $values;
+  perspective: $values;
+}
+
+@mixin backface-visibility($values) {
+  -webkit-backface-visibility: $values;
+  -moz-backface-visibility: $values;
+  -ms-backface-visibility: $values;
+  backface-visibility: $values;
+}
+
+@mixin transition($values) {
+  -webkit-transition: $values;
+  -moz-transition: $values;
+  -o-transition: $values;
+  transition: $values;
+}
+
+@mixin linear-gradient($fromColor, $toColor) {
+  background-color: $fromColor;
+  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor));
+  background-image: -webkit-linear-gradient(top, $fromColor, $toColor);
+  background-image: -moz-linear-gradient(top, $fromColor, $toColor);
+  background-image: -ms-linear-gradient(top, $fromColor, $toColor);
+  background-image: -o-linear-gradient(top, $fromColor, $toColor);
+  background-image: linear-gradient(to bottom, $fromColor, $toColor);
+  background-repeat: repeat-x;
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
 }
 
 @mixin retina {
