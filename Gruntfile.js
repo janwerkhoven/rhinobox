@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
   'use strict';
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     connect: {
@@ -97,6 +98,21 @@ module.exports = function(grunt) {
           'dist/assets/js/main.min.js': ['dist/assets/js/main.js']
         }
       }
+    },
+    clean: {
+      build: {
+        src: ['dist/']
+      }
+    },
+    copy: {
+      main: {
+        files: [{
+          expand: true,
+          cwd: 'public/',
+          src: ['**'],
+          dest: 'dist/'
+        }]
+      }
     }
   });
 
@@ -109,10 +125,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // commands
-  grunt.registerTask('default', ['handlebarslayouts', 'sass', 'jshint', 'concat', 'uglify', 'connect', 'watch']);
-  grunt.registerTask('serve', ['connect', 'watch']);
-  grunt.registerTask('build', ['handlebarslayouts', 'sass', 'jshint', 'concat', 'uglify']);
+  grunt.registerTask('default', ['clean', 'copy', 'handlebarslayouts', 'sass', 'jshint', 'concat', 'uglify', 'connect', 'watch']);
+  grunt.registerTask('build', ['clean', 'copy', 'handlebarslayouts', 'sass', 'jshint', 'concat', 'uglify']);
+  grunt.registerTask('server', ['connect', 'watch']);
 
 };
