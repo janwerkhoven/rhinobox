@@ -46,11 +46,12 @@ $(document).ready(function() {
   $('#landing #hero h2 span').each(function(i){
     $(this).velocity({
       opacity: 1,
-      rotateY: 0
+      rotateY: 0,
+      translateX: 0 - (i * 4)
     }, {
       duration: 600,
-      easing: "ease-out-expo",
-      delay: 0 + (i * 700),
+      easing: "easeOut",
+      delay: 200 + (i * 200),
     });
   });
 
