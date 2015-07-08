@@ -76,67 +76,100 @@ $(document).ready(function() {
 
   $('#prijs button.next').on('click', function() {
     var $input = $(this).siblings('input');
-    var max = parseInt($input.attr('max'), 0);
-    var a = parseInt($input.val(), 0);
-    a = a || 0;
-    var b = (a + 1) <= max ? a + 1 : a;
-    console.log(max, a, b);
-    $input.val(b);
+    $input.val(parseInt($input.val()) + 1);
+    correctAmounts();
     calculatePrice();
   });
 
   $('#prijs button.prev').on('click', function() {
     var $input = $(this).siblings('input');
-    var min = parseInt($input.attr('min'), 0);
-    var a = parseInt($input.val(), 0);
-    a = a || 1;
-    var b = (a - 1) >= min ? a - 1 : a;
-    console.log(min, a, b);
-    $input.val(b);
+    $input.val(parseInt($input.val()) - 1);
+    correctAmounts();
     calculatePrice();
   });
 
-  $('#prijs .aantal.dozen input, #prijs .aantal.dagen input').on('keyup change blur', function() {
-    calculatePrice();
+  $('#prijs .aantal.dozen input, #prijs .aantal.weken input').on('keyup change blur', function(e) {
+    console.log(e.type);
+    if ($(this).val() !== '' && e.type == 'keyup') {
+      correctAmounts();
+      calculatePrice();
+    }
   });
+
+  function correctAmounts() {
+
+    var aantalDozen = parseInt($('#prijs .aantal.dozen input').val(), 0);
+    var aantalWeken = parseInt($('#prijs .aantal.weken input').val(), 0);
+
+    if (aantalDozen < 1 || !aantalDozen) {
+      $('#prijs .aantal.dozen input').val(1);
+    } else if (aantalDozen > 200) {
+      $('#prijs .aantal.dozen input').val(200);
+    }
+
+    if (aantalWeken < 1 || !aantalWeken) {
+      $('#prijs .aantal.weken input').val(1);
+    } else if (aantalWeken > 52) {
+      $('#prijs .aantal.weken input').val(52);
+    }
+
+  }
 
   function calculatePrice() {
 
     var aantalDozen = parseInt($('#prijs .aantal.dozen input').val(), 0);
-    var aantalDagen = parseInt($('#prijs .aantal.dagen input').val(), 0);
+    var aantalWeken = parseInt($('#prijs .aantal.weken input').val(), 0);
     var postcodeA = $('#prijs .postcode.levering input').val();
     var postcodeB = $('#prijs .postcode.ophaling input').val();
 
     aantalDozen = aantalDozen || 1;
+    aantalWeken = aantalWeken || 1;
 
-    var basisPrijs = (aantalDozen * 3.6).toFixed(2);
-    $('#prijs .basis-prijs').html('&euro; ' + basisPrijs);
+    // basisprijs
+    var basisPrijs = ((aantalDozen * 3.6) + ((aantalWeken - 1) * aantalDozen * 1)).toFixed(2);
+    $('#prijs .basisprijs').html('&euro; ' + basisPrijs);
 
+    // volumekorting
     var volumeKorting = (aantalDozen * 0.005555555556 * 100).toFixed(1);
     volumeKorting = volumeKorting < 5 ? 0 : volumeKorting;
     volumeKorting = volumeKorting >= 50 ? 50 : volumeKorting;
     volumeKortingLabel = volumeKorting ? '- ' + volumeKorting + '%' : '-';
-    $('#prijs .volume-korting').html(volumeKortingLabel);
+    $('#prijs .volumekorting').html(volumeKortingLabel);
 
+
+
+    // per week is het gewoon 1 euro per doos extra per week
+    // dus voor 30 dozen een week langer is dit 30euro
+    // voor 100 dozen een week langer 100 euro.
+
+
+
+    // totaalprijs + afronding
     var totaalPrijs = basisPrijs - (basisPrijs * (volumeKorting / 100));
+    var afronding = (totaalPrijs - parseInt(totaalPrijs, 0)).toFixed(2);
+    $('#prijs .afronding').html('&euro; -' + afronding);
+    $('#prijs .totaalprijs').html('&euro; ' + parseInt(totaalPrijs, 0));
 
 
 
-    $('#prijs .totaal-prijs').html('&euro; ' + parseInt(totaalPrijs, 0));
+
 
     postcodeA = postcodeA.length;
 
-    console.log('calculate price', aantalDozen, aantalDagen, postcodeA, postcodeB, basisPrijs, 'huh');
 
 
-
-    $('#prijs .prijs h2').html('Uw prijs: ' + aantalDozen * aantalDagen + ' Euro');
-    console.log(aantalDozen, aantalDagen, aantalDozen * aantalDagen);
+    $('#prijs .prijs h2').html('Uw prijs: ' + aantalDozen * aantalWeken + ' Euro');
+    console.log(aantalDozen, aantalWeken, aantalDozen * aantalWeken);
     // $('#prijs .preview').html('');
     for (i = 0; i < aantalDozen; i++) {
       // $('#prijs .preview').append('<div class="box">' + (i + 1) + '</div>');
     }
   }
+
+  correctAmounts();
+  calculatePrice();
+
+  // POSTCODES
 
   $('#prijs .postcode.levering input, #prijs .postcode.ophaling input').on('keypress', function(e) {
     if ((e.which !== 8 && e.which !== 0 && (e.which < 48 || e.which > 57)) || $(this).val().length >= 4) {
@@ -169,7 +202,7 @@ $(document).ready(function() {
     $(this).siblings('.result').html(str).show();
   }).siblings('.result').hide();
 
-  $('#prijs .aantal.dozen input, #prijs .aantal.dagen input').on('keypress blur change', function(e) {
+  $('#prijs .aantal.dozen input, #prijs .aantal.weken input').on('keypress blur change', function(e) {
     console.log('fire', $(this).parent().attr('class'));
 
     //if the letter is not digit then display error and don't type anything
